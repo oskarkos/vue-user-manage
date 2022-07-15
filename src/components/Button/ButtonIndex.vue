@@ -63,22 +63,22 @@ export default defineComponent({
   }
 
   &__primary {
-    border: 2px solid $green-primary;
-    background-color: $green-primary;
+    border: 2px solid $blue-primary;
+    background-color: $blue-primary;
     color: white;
     &:hover {
       background-color: white;
-      border-color: $green-primary;
-      color: $green-primary;
+      border-color: $blue-primary;
+      color: $blue-primary;
     }
   }
   &__secondary {
     border: 2px solid white;
     background-color: white;
-    color: $green-primary;
+    color: $blue-primary;
 
     &:hover {
-      background-color: $green-primary;
+      background-color: $blue-primary;
       border-color: white;
       color: white;
     }

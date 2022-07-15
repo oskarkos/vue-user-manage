@@ -1,49 +1,55 @@
 <template>
   <div class="login">
+    <img
+      class="login__background"
+      :src="getImageUrl('wavebackground.svg')"
+      alt=""
+      srcset=""
+    />
     <div class="login__card">
-      <div class="login__card-leftSide">
-        <h1>LOGIN</h1>
-        <div class="login__input">
-          <label for="user">User</label>
-          <div
-            class="login__input-container"
-            :class="
-              hasError
-                ? 'login__input-containerError'
-                : 'login__input-containerNormal'
-            "
-          >
-            <input type="text" name="user" v-model="user" />
-          </div>
-        </div>
-        <div class="login__input">
-          <label for="pass">Password</label>
-          <div
-            class="login__input-container"
-            :class="
-              hasError
-                ? 'login__input-containerError'
-                : 'login__input-containerNormal'
-            "
-          >
-            <input type="password" name="pass" v-model="pass" />
-          </div>
-        </div>
-        <div class="login__button">
-          <Button
-            button-type="secondary"
-            button-text="Login"
-            @click-button="login"
-          ></Button>
-        </div>
-        <p class="login__errorMessage" v-if="emptyData">Fields Required</p>
-        <p class="login__errorMessage" v-if="incorrectData">
-          User or Password incorrect
-        </p>
+      <div class="login__card-header">
+        <h3>WELCOME BACK</h3>
+        <p>Please, login to the platform to manage the users</p>
       </div>
-      <div class="login__card-rightSide">
-        <a target="_blank" href="http://athmos.co/">Athmos</a>
+      <h1>LOGIN</h1>
+      <div class="login__input">
+        <label for="user">User</label>
+        <div
+          class="login__input-container"
+          :class="
+            hasError
+              ? 'login__input-containerError'
+              : 'login__input-containerNormal'
+          "
+        >
+          <input type="text" name="user" v-model="user" />
+        </div>
       </div>
+      <div class="login__input">
+        <label for="pass">Password</label>
+        <div
+          class="login__input-container"
+          :class="
+            hasError
+              ? 'login__input-containerError'
+              : 'login__input-containerNormal'
+          "
+        >
+          <input type="password" name="pass" v-model="pass" />
+        </div>
+      </div>
+      <div class="login__button">
+        <Button
+          button-type="primary"
+          icon="fa-solid fa-right-to-bracket"
+          button-text="Login"
+          @click-button="login"
+        ></Button>
+      </div>
+      <p class="login__errorMessage" v-if="emptyData">Fields Required</p>
+      <p class="login__errorMessage" v-if="incorrectData">
+        User or Password incorrect
+      </p>
     </div>
   </div>
 </template>
@@ -64,7 +70,9 @@ export default defineComponent({
     const pass = ref("");
     const incorrectData = ref(false);
     const emptyData = ref(false);
-
+    const getImageUrl = (name: string) => {
+      return new URL(`../../assets/${name}`, import.meta.url).href;
+    };
     const hasError = computed(() => emptyData.value || incorrectData.value);
 
     const existLoginData = () => {
@@ -96,6 +104,7 @@ export default defineComponent({
       incorrectData,
       emptyData,
       hasError,
+      getImageUrl,
     };
   },
 });
@@ -103,78 +112,68 @@ export default defineComponent({
 
 <style lang="scss">
 .login {
+  @include flexRow;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
-  background: rgb(4, 201, 157);
-  background: linear-gradient(
-    90deg,
-    rgba(4, 201, 157, 0.8677494199535962) 6%,
-    rgba(177, 190, 202, 0.7703016241299304) 98%
-  );
+  position: relative;
+  background: $background-primary;
+  &__background {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+  }
   &__card {
-    width: 70%;
-    display: flex;
-    height: calc(100vh - 30%);
-    border: 2px solid $background-primary;
+    @include flexColumn;
+    padding-bottom: 3rem;
+    width: 50%;
+    height: auto;
     border-radius: 1rem;
-    background-color: #ffffff45;
-    &-leftSide {
-      width: 60%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      & h1 {
-        font-size: 2rem;
-        color: white;
-        letter-spacing: 3px;
-      }
+    position: relative;
+    z-index: 1;
+    margin-bottom: 3rem;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    & h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: $blue-secondary;
     }
-    &-rightSide {
-      border-radius: 0.9rem;
-      background-color: $background-primary;
-      box-shadow: -11px 0px 21px -1px rgba(0, 0, 0, 0.19);
-      width: 40%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      & img {
-        width: 60%;
-      }
-      & a {
-        height: auto;
-        position: absolute;
-        outline: none;
-        bottom: 1rem;
-        color: $blue-primary;
+    &-header {
+      @include flexColumn;
+      margin-bottom: 1rem;
+      background-color: $blue-primary;
+      color: white;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 1rem 1rem 4rem 4rem;
+      & h3 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0;
       }
     }
   }
   &__button {
-    width: 250px;
+    margin: 2rem 0;
+    width: 50%;
   }
   &__errorMessage {
     text-align: start;
-    width: 250px;
+    width: 50%;
     color: $error-primary;
     font-size: 0.8rem;
     font-weight: bold;
     margin-top: 1rem;
   }
   &__input {
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 50%;
+    @include flexColumn;
     align-items: flex-start;
     label {
-      color: $background-primary;
+      color: $blue-secondary;
       font-size: 1rem;
       letter-spacing: 2px;
       font-weight: bold;
@@ -183,20 +182,18 @@ export default defineComponent({
       border: 2px solid $error-primary;
     }
     &-containerNormal {
-      border: 2px solid $background-primary;
+      border: 2px solid $blue-secondary;
     }
     &-container {
+      @include flexRow;
       width: 100%;
       height: 2.4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: none;
       border-radius: 0.8rem;
       margin-bottom: 1rem;
       padding: 0.3rem 0.5rem 0.3rem 0.5rem;
       input {
-        color: white;
+        color: $blue-secondary;
         width: 100%;
         outline: none;
         background: none;

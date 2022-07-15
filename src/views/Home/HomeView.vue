@@ -1,14 +1,15 @@
 <template>
-  <HelloWorldVue msg="prueba" />
+  <div>
+    <p>Hola a la plataforma</p>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorldVue from "../../components/HelloWorld.vue";
 
 export default defineComponent({
   name: "HomeView",
-  components: { HelloWorldVue },
+  components: {},
   setup() {
     return {};
   },
