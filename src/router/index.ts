@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/Home/HomeView.vue";
 import LoginView from "../views/Login/LoginView.vue";
-import store from "../store/index";
+import MainLayout from "../layouts/MainLayout.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       requiresAuth: true,
     },
+    component: MainLayout,
     children: [
       {
         path: "",
@@ -40,7 +41,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.state.loggedIn) {
+    if (!localStorage.getItem("user")) {
       next({ name: "login-index" });
     } else {
       next();

@@ -90,7 +90,7 @@ export default defineComponent({
       if (!existLoginData()) return;
       if (user.value === "admin" && pass.value === "admin") {
         incorrectData.value = false;
-        store.dispatch("mockLogin");
+        localStorage.setItem("user", user.value);
         router.push("/");
       } else {
         incorrectData.value = true;
@@ -127,7 +127,7 @@ export default defineComponent({
   &__card {
     @include flexColumn;
     padding-bottom: 3rem;
-    width: 50%;
+    width: 40%;
     height: auto;
     border-radius: 1rem;
     position: relative;
@@ -158,18 +158,18 @@ export default defineComponent({
   }
   &__button {
     margin: 2rem 0;
-    width: 50%;
+    width: 70%;
   }
   &__errorMessage {
     text-align: start;
-    width: 50%;
+    width: 70%;
     color: $error-primary;
     font-size: 0.8rem;
     font-weight: bold;
     margin-top: 1rem;
   }
   &__input {
-    width: 50%;
+    width: 70%;
     @include flexColumn;
     align-items: flex-start;
     label {
@@ -200,6 +200,34 @@ export default defineComponent({
         border: 0;
         font-size: medium;
       }
+    }
+  }
+}
+@media screen and (max-width: 1045px) {
+  .login {
+    &__card {
+      width: 60%;
+    }
+    &__input {
+      width: 60%;
+    }
+    &__button {
+      width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 648px) {
+  .login {
+    &__card {
+      width: 100%;
+      margin: 2rem;
+    }
+    &__input {
+      width: 80%;
+    }
+    &__button {
+      width: 80%;
     }
   }
 }
