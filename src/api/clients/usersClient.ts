@@ -6,12 +6,6 @@ export interface IUserClient {
   getUsers(): Promise<AxiosResponse<IUSer[]>>;
 }
 
-export interface IGetAccountParams {
-  currencyCode: string;
-  page: number;
-  size: number;
-}
-
 export function buildUserClient(
   httpInstance: AxiosInstance = apiAxiosInstanceWithoutAuth,
 ): IUserClient {

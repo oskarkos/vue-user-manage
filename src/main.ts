@@ -12,6 +12,9 @@ import {
   faUsers,
   faBars,
   faBarsStaggered,
+  faPlus,
+  faClose,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -19,7 +22,10 @@ library.add(
   faArrowRightFromBracket,
   faUsers,
   faBars,
-  faBarsStaggered
+  faBarsStaggered,
+  faPlus,
+  faClose,
+  faCheck
 );
 
 const app = createApp(App);

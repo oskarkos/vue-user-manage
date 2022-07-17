@@ -51,11 +51,11 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  height: 2.5rem;
+  border-radius: 8px;
+  height: 3rem;
   cursor: pointer;
   &__icon {
-    margin-right: 0.5rem;
+    margin-right: 1rem;
   }
   p {
     font-size: 1rem;

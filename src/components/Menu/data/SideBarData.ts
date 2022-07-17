@@ -8,7 +8,7 @@ export const sideBarData: ISideBar[] = [
     isOpen: true,
   },
   {
-    routeUrl: "/login",
+    routeUrl: "/",
     label: "Sign out",
     icon: "fa-solid fa-arrow-right-from-bracket",
     isOpen: true,

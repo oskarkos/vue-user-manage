@@ -2,6 +2,8 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/Home/HomeView.vue";
 import LoginView from "../views/Login/LoginView.vue";
 import MainLayout from "../layouts/MainLayout.vue";
+import UsersTodosView from "../views/UsersTodos/UserTodosView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,6 +22,21 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/user/:id/todos",
+    name: "users-todos",
+    meta: {
+      requiresAuth: true,
+    },
+    component: MainLayout,
+    children: [
+      {
+        path: "",
+        name: "todos",
+        component: UsersTodosView,
+      },
+    ],
+  },
+  {
     path: "/login",
     name: "login",
     children: [
@@ -29,6 +46,11 @@ const routes: Array<RouteRecordRaw> = [
         component: LoginView,
       },
     ],
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: NotFoundView,
   },
 ];
 

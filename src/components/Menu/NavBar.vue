@@ -42,6 +42,8 @@ export default defineComponent({
   justify-content: space-between;
   height: 4.6rem;
   padding: 0 2rem;
+  position: absolute;
+  top: 0;
   background-color: white;
   box-shadow: 0px 4px 4px rgba(43, 45, 55, 0.02);
   &__leftSide {

@@ -11,6 +11,7 @@
         :label="item.label"
         :icon="item.icon"
         :is-open="item.isOpen"
+        @clickSideBarItem="clickSideBarItem"
       />
     </div>
   </div>
@@ -39,10 +40,22 @@ export default defineComponent({
         };
       })
     );
-    return { sideBarDataWithOpen };
+
+    const clickSideBarItem = (label: string) => {
+      if (label === "Sign out") {
+        localStorage.removeItem("user");
+        location.reload();
+      }
+    };
+
+    return {
+      sideBarDataWithOpen,
+      clickSideBarItem,
+    };
   },
 });
 </script>
+
 <style lang="scss">
 .sideBar {
   @include flexColumn;

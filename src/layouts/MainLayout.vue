@@ -4,8 +4,10 @@
     :class="menuOpened ? 'mainLayout__sideBarOpen' : 'mainLayout__sideBarClose'"
   >
     <SideBar :is-open="menuOpened" />
-    <NavBar :is-open="menuOpened" @clickIcon="toggleMenu" />
-    <router-view />
+    <div class="mainLayout__content">
+      <NavBar :is-open="menuOpened" @clickIcon="toggleMenu" />
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -35,12 +37,17 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .mainLayout {
-  @include flexColumn;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 100vh;
   width: 100%;
   background-color: $background-primary;
+  &__content {
+    @include flexColumn;
+    width: 100%;
+    height: 100vh;
+    padding-top: 6.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+  }
   &__sideBarOpen {
     padding: 0 3rem 0 19rem;
   }

@@ -2,6 +2,7 @@
   <div
     class="sideBarItem"
     :class="isOpen ? 'sideBarItem__open' : 'sideBarItem__close'"
+    @click="clickSideBarItem"
   >
     <router-link class="sideBarItem__link" :to="routeUrl">
       <fa-icon
@@ -43,8 +44,13 @@ export default defineComponent({
       default: true,
     },
   },
-  setup: (props) => {
-    return {};
+  setup: (props, { emit }) => {
+    const clickSideBarItem = () => {
+      emit("clickSideBarItem", props.label);
+    };
+    return {
+      clickSideBarItem,
+    };
   },
 });
 </script>
