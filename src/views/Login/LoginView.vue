@@ -56,7 +56,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import Button from "@/components/Button/ButtonIndex.vue";
 
@@ -64,7 +63,6 @@ export default defineComponent({
   name: "LoginView",
   components: { Button },
   setup() {
-    const store = useStore();
     const router = useRouter();
     const user = ref("");
     const pass = ref("");
@@ -88,7 +86,7 @@ export default defineComponent({
 
     const login = () => {
       if (!existLoginData()) return;
-      if (user.value === "admin" && pass.value === "admin") {
+      if (user.value === "Aplyca" && pass.value === "Aplyca") {
         incorrectData.value = false;
         localStorage.setItem("user", user.value);
         router.push("/");

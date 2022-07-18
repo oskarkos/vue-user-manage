@@ -26,7 +26,7 @@
           :header-columns="tableColumns"
           :key="user.id"
         >
-          <TableItem :cols-to-take="2">
+          <TableItem :cols-to-take="1">
             {{ user.id }}
           </TableItem>
           <TableItem :cols-to-take="3">
@@ -46,6 +46,11 @@
           </TableItem>
           <TableItem :cols-to-take="3">
             {{ user.company.name }}
+          </TableItem>
+          <TableItem :cols-to-take="2" class="options">
+            <router-link class="options__link" :to="`/user/${user.id}/todos`">
+              <fa-icon icon="fa-solid fa-list-check" />
+            </router-link>
           </TableItem>
         </TableRow>
       </template>
@@ -267,5 +272,14 @@ export default defineComponent({
 
 .colorTitle {
   color: $text-disabled;
+}
+
+.options {
+  font-size: 1.2rem !important;
+  cursor: pointer;
+  &__link {
+    text-decoration: none;
+    color: $blue-primary;
+  }
 }
 </style>

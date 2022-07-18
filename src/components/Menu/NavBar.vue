@@ -8,14 +8,18 @@
       />
       <h3 class="navBar__leftSide-subtitle">Dashboard</h3>
     </div>
-    <div>
-      <p>Juan</p>
+    <div class="navBar__rightSide">
+      <img
+        class="navBar__rightSide-image"
+        src="https://xsgames.co/randomusers/avatar.php?g=male"
+      />
+      <p class="navBar__rightSide-subtitle">{{ username }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "NavBar",
@@ -28,10 +32,11 @@ export default defineComponent({
     },
   },
   setup: (props, { emit }) => {
+    const username = localStorage.getItem("user");
     function emitClickIcon() {
       emit("clickIcon");
     }
-    return { emitClickIcon };
+    return { emitClickIcon, username };
   },
 });
 </script>
@@ -58,6 +63,20 @@ export default defineComponent({
     &-subtitle {
       font-size: 0.9rem;
       font-weight: normal;
+    }
+  }
+  &__rightSide {
+    @include flexRow;
+    color: $subtitle-primary;
+    &-subtitle {
+      font-size: 0.9rem;
+      font-weight: normal;
+    }
+    &-image {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      margin-right: 1rem;
     }
   }
 }

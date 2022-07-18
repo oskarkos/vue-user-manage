@@ -1,7 +1,7 @@
 const tableDataHeader = [
   {
-    title: "User id",
-    colsToTake: 2,
+    title: "ID",
+    colsToTake: 1,
   },
   {
     title: "Name",
@@ -19,8 +19,12 @@ const tableDataHeader = [
     title: "Company",
     colsToTake: 3,
   },
+  {
+    title: "Options",
+    colsToTake: 2,
+  },
 ];
 
-const tableColumns = 16;
+const tableColumns = 17;
 
 export { tableDataHeader, tableColumns };
