@@ -10,40 +10,13 @@
       ></Button>
     </div>
     <div class="todoContainer__list">
-      <div
-        :class="
-          todo.completed ? 'todoContainer__list-itemCompleted' : undefined
-        "
-        class="todoContainer__list-item"
+      <TodoCard
         v-for="todo in todos"
-      >
-        <div class="todoContainer__list-itemLeft">
-          <fa-icon
-            class="todoContainer__list-icon"
-            :class="
-              todo.completed
-                ? 'todoContainer__list-completed'
-                : 'todoContainer__list-notCompleted'
-            "
-            :icon="
-              todo.completed
-                ? 'fa-solid fa-circle-check'
-                : 'fa-regular fa-circle-check'
-            "
-            @click="changeTodoState(todo.id)"
-          />
-          <div class="todoContainer__list-item-text">
-            <p>
-              {{ todo.title.charAt(0).toUpperCase() + todo.title.slice(1) }}
-            </p>
-          </div>
-        </div>
-        <fa-icon
-          class="todoContainer__list-icon todoContainer__list-completed"
-          icon="fa-solid fa-trash-can"
-          @click="deleteTodo(todo.id)"
-        />
-      </div>
+        :key="todo.id"
+        :todo="todo"
+        @changeTodoState="changeTodoState"
+        @deleteTodo="deleteTodo"
+      />
     </div>
     <Modal :show="showModal" @closeModal="toggleModal(false)">
       <div class="modalContent">
@@ -76,6 +49,7 @@ import { uuid } from "vue-uuid";
 import Button from "../../components/Button/ButtonIndex.vue";
 import Modal from "../../components/Modal/ModalIndex.vue";
 import Input from "../../components/Input/InputIndex.vue";
+import TodoCard from "./components/TodosCard.vue";
 
 export default defineComponent({
   name: "UsersTodosView",
@@ -83,9 +57,9 @@ export default defineComponent({
     Button,
     Modal,
     Input,
+    TodoCard,
   },
-  props: {},
-  setup: (props) => {
+  setup: () => {
     const route = useRoute();
     const store = useStore();
     const userId = computed(() => route.params.id);
@@ -168,36 +142,6 @@ export default defineComponent({
     height: 100%;
     overflow: scroll;
     row-gap: 1rem;
-    &-item {
-      @include flexRow;
-      width: 100%;
-      border-radius: 10px;
-      justify-content: space-between;
-      background-color: white;
-      padding: 1rem 2rem;
-      border: 1px solid white;
-    }
-    &-itemLeft {
-      @include flexRow;
-      height: 100%;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    &-icon {
-      font-size: 1.5rem;
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-    &-itemCompleted {
-      border: 1px solid $blue-primary;
-      background-color: $background-secondary;
-    }
-    &-notCompleted {
-      color: $text-disabled;
-    }
-    &-completed {
-      color: $blue-primary;
-    }
   }
 }
 .modalContent {
