@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
@@ -7,12 +7,13 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": resolve(__dirname, "./src"),
     },
   },
   css: {
     preprocessorOptions: {
       scss: {
+        sourceMap: true,
         additionalData: `@import "@/assets/scss/main.scss";`,
       },
     },
